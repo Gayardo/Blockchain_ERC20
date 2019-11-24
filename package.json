@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/Gayardo/erc_20#readme",
   "dependencies": {
+    "ethereumjs-testrpc": "^6.0.3",
+    "ethereumjs-tx": "^2.1.1",
+    "web3": "^0.20.1",
     "zeppelin-solidity": "1.12.0"
   }
 }
