@@ -6,7 +6,9 @@ import 'zeppelin-solidity/contracts/math/SafeMath.sol';
  * @title A fixed supply ERC-20 token.
  * https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md
  */
-contract Token {
+import  "../IERC20.sol";
+import  "../WhitelistedRole.sol";
+contract Token is IERC20, WhitelistedRole{
     using SafeMath for uint;
     event Transfer(
         address indexed _from,
@@ -61,7 +63,7 @@ contract Token {
      * @param _value Number of tokens to transfer.
      * @return True if the transfer succeeded.
      */
-    function transfer(address _to, uint _value) public returns (bool success) {
+    function transfer(address _to, uint _value)  onlyWhitelisted public returns (bool success) {
         balances[msg.sender] = balances[msg.sender].sub(_value);
         balances[_to] = balances[_to].add(_value);
         emit Transfer(msg.sender, _to, _value);
@@ -78,6 +80,7 @@ contract Token {
      * @return True if the transfer succeeded.
      */
     function transferFrom(address _from, address _to, uint _value)
+        onlyWhitelisted
         public
         returns (bool success)
     {
